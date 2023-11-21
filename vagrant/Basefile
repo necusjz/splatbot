@@ -11,8 +11,8 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 8000, host: 8000 # Web App
   config.vm.network "forwarded_port", guest: 9000, host: 9000 # Remote server
 
-  # Explicitly create a shared folder of the Vagrantfile directory at /vagrant in the VM
-  config.vm.synced_folder "..", "/vagrant"
+  # Explicitly create a shared folder of the Vagrantfile directory at /splatbot in the VM
+  config.vm.synced_folder "..", "/splatbot"
 
   # Install Splatbot
   config.vm.provision "shell", inline: <<-SHELL
