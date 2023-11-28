@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import re
 import subprocess
-
 from shutil import which
 
 

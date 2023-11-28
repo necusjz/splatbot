@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "generic/ubuntu2004"
+  config.vm.box = "generic/ubuntu2010"
 
   # Publicly forwarded ports.
   # The below ports are accessible to all machines on the same network.
