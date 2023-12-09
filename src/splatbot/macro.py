@@ -41,5 +41,13 @@ def generate_macro(image_path):
 
     commands.append("b")  # save and quit
 
+    print("Benchmark: Pathing algorithm is ", end="")
+    prev = 120 * 320 + np.count_nonzero(img)
+    curr = len(commands)
+    if curr < prev:
+        print(f"{prev / curr:.2f}x faster ({curr} vs. {prev}).")
+    else:
+        print(f"{curr / prev:.2f}x slower ({curr} vs. {prev}).")
+
     with open("sequence", "w", encoding="utf-8") as fp:
         fp.write("\n".join(commands))
