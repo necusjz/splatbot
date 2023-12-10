@@ -1,7 +1,7 @@
 [project]
 name = "splatbot"
 version = "0.1.0"
-description = "Automate drawing detailed plaza posts in Splatoon based on BlueZ, and optimize its efficiency by treating it as a Travelling Salesman Problem (TSP)."
+description = "Automate plotting detailed posts in Splatoon wirelessly based on BlueZ, and optimize its efficiency by treating the process as a variant of Traveling Salesman Problem (TSP)."
 readme = "README.md"
 authors = [{name = "necusjz", email = "necusjz@gmail.com"}]
 classifiers = [
@@ -14,6 +14,9 @@ classifiers = [
 requires-python = ">=3.8"
 dependencies = [
     "click>=8.1.3",
+    "numpy>=1.23.2",
+    "nxbt>=0.1.4",
+    "Pillow>=9.2.0",
 ]
 
 [project.scripts]
@@ -22,3 +25,6 @@ splatbot = "splatbot.cli:main"
 [build-system]
 requires = ["flit_core<4"]
 build-backend = "flit_core.buildapi"
+
+[tool.flit.module]
+name = "splatbot"
