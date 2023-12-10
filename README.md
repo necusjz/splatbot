@@ -1,5 +1,5 @@
 # splatbot
-Automate drawing detailed plaza posts in Splatoon based on BlueZ, and optimize its efficiency by treating it as a Travelling Salesman Problem (TSP).
+Automate plotting detailed posts in [Splatoon](https://en.wikipedia.org/wiki/Splatoon) wirelessly based on BlueZ, and optimize its efficiency by treating the process as a variant of Traveling Salesman Problem (TSP).
 
 ## Installation
 [BlueZ](http://www.bluez.org/) is a Bluetooth protocol stack included with the official Linux kernel distributions. If you have a Linux machine with a Bluetooth connection, then things become easier:
@@ -8,30 +8,28 @@ $ sudo pip install splatbot
 ```
 
 If you're using macOS or Windows, an external Bluetooth adapter is needed and please follow the instructions below:
-1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
-2. Install [VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads).
-3. Install [Vagrant](https://developer.hashicorp.com/vagrant/install).
-4. Clone splatbot and create a Vagrantfile:
+1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+2. Install [VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads)
+3. Install [Vagrant](https://developer.hashicorp.com/vagrant/install)
+4. Clone splatbot and make a Vagrantfile:
     ```bash
    $ git clone https://github.com/necusjz/splatbot.git
-   $ cd splatbot
+   $ cd splatbot/vagrant
    $ ./make_vagrantfile.py
     ```
 
 After that, a Vagrantfile will be generated and the current directory is the location where you run any Vagrant command.
 
 ## Usage
-Roughly speaking, it can be divided into two phases:
-1. Generate macros representing the actual drawing process:
-    ```bash
-    $ splatbot macro -i <image>
-    ```
-2. Start drawing and you'll see the current progress:
-    ```bash
-    $ splatbot start -i <macro>
-    ```
+Generate the macro represents the actual plotting process:
+ ```bash
+ $ splatbot macro -i <image>
+ ```
 
-Press the sync button on your controller(s) and wait until the screen shows the "Press L+R on the controller." menu.
+Start plotting the post and display the current progress:
+ ```bash
+ $ splatbot start -i <macro>
+ ```
 
 ### Vagrant commands
 Create and configure guest machines according to your Vagrantfile:
