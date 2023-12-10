@@ -19,7 +19,7 @@ runs:
     - shell: bash
       run: |
         # Install prerequisites.
-        pip install --upgrade pip wheel virtualenv build
+        pip install --upgrade pip flit wheel virtualenv
 
     - shell: bash
       run: |
@@ -51,6 +51,6 @@ runs:
       run: |
         # Show environment info.
         . .venv/bin/activate
-        echo "✓ Installed $(python --version) virtual environment to $(which python)"
+        echo "Successfully installed $(python --version) virtual environment to $(which python)"
         echo "Packages:"
         pip freeze
