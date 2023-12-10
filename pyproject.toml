@@ -19,6 +19,17 @@ dependencies = [
     "Pillow>=9.2.0",
 ]
 
+[project.urls]
+Homepage = "https://github.com/necusjz/splatbot"
+Repository = "https://github.com/necusjz/splatbot"
+Changelog = "https://github.com/necusjz/splatbot/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+dev = [
+    "twine>=1.11.0",
+    "packaging"
+]
+
 [project.scripts]
 splatbot = "splatbot.cli:main"
 
