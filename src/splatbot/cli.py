@@ -19,13 +19,17 @@ def macro(input):
     generate_macro(input)
 
 
-@main.command(help="Start plotting the post and display the current progress.")
+@main.command(help="Start plotting the post on switch console or another window.")
 @click.option(
     "--input", "-i", required=True, metavar="PATH",
-    help="Path to the macro that simulates the sequence of buttons."
+    help="Path to the macro stands for the button sequence."
 )
-def start(input):
-    start_plotting(input)
+@click.option(
+    "--dry-run", is_flag=True,
+    help="Do not plot on switch console directly, but do simulation."
+)
+def start(input, dry_run):
+    start_plotting(input, dry_run)
 
 
 if __name__ == "__main__":

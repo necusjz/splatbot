@@ -4,7 +4,7 @@ Automate plotting detailed posts in [Splatoon](https://en.wikipedia.org/wiki/Spl
 ## Installation
 [BlueZ](http://www.bluez.org/) is a Bluetooth protocol stack included with the official Linux kernel distributions. If you have a Linux machine with a Bluetooth connection, then things become easier:
 ```bash
-$ sudo pip install splatbot
+$ pip install splatbot
 ```
 
 If you're using macOS or Windows, an external Bluetooth adapter is needed and please follow the instructions below:
@@ -26,9 +26,9 @@ Generate the macro represents the actual plotting process:
  $ splatbot macro -i <image>
  ```
 
-Start plotting the post and display the current progress:
+Start plotting the post on switch console or another window:
  ```bash
- $ splatbot start -i <macro>
+ $ splatbot start -i <macro> [--dry-run]
  ```
 
 ### Vagrant commands
