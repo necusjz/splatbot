@@ -1,3 +1,8 @@
+# https://setuptools.pypa.io/en/latest/userguide/quickstart.html
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "splatbot"
 version = "0.1.0"
@@ -27,16 +32,15 @@ repository = "https://github.com/necusjz/splatbot"
 
 [project.optional-dependencies]
 dev = [
+    "build>=1.0.3",
     "twine>=1.11.0",
-    "packaging",
 ]
 
 [project.scripts]
 splatbot = "splatbot.cli:main"
 
-[build-system]
-requires = ["flit_core<4"]
-build-backend = "flit_core.buildapi"
-
-[tool.flit.module]
-name = "splatbot"
+[tool.setuptools.packages.find]
+exclude = [
+    "tests*",
+    "vagrant*",
+]

@@ -19,7 +19,7 @@ runs:
     - shell: bash
       run: |
         # Install prerequisites.
-        pip install --upgrade pip flit wheel virtualenv
+        pip install --upgrade pip setuptools wheel virtualenv
 
     - shell: bash
       run: |
