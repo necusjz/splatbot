@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "splatbot"
 dynamic = ["version"]
-description = "Automate plotting detailed posts in Splatoon wirelessly based on BlueZ, and optimize its efficiency by treating the process as a variant of Traveling Salesman Problem (TSP)."
+description = "Automate plotting posts in Splatoon based on BlueZ, and optimize its efficiency via Traveling Salesman Problem (TSP)."
 authors = [{name = "necusjz", email = "necusjz@gmail.com"}]
 requires-python = ">=3.8"
 readme = "README.md"
@@ -33,7 +33,7 @@ repository = "https://github.com/necusjz/splatbot"
 [project.optional-dependencies]
 dev = [
     "build>=1.0.3",
-    "pytest>=7.2.1",
+    "packaging>=23.1",
     "twine>=1.11.0",
 ]
 
@@ -42,6 +42,7 @@ splatbot = "splatbot.cli:main"
 
 [tool.setuptools.packages.find]
 exclude = [
+    "scripts*",
     "tests*",
     "vagrant*",
 ]

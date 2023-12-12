@@ -104,6 +104,10 @@ jobs:
           name: package
           path: dist
 
+      - name: Generate release notes
+        run: |
+          python scripts/release_notes.py > ${{ github.workspace }}-RELEASE_NOTES.md
+
       - name: Publish package to PyPI
         run: |
           twine upload -u '${{ secrets.PYPI_USERNAME }}' -p '${{ secrets.PYPI_PASSWORD }}' dist/*
@@ -113,6 +117,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          body_path: ${{ github.workspace }}-RELEASE_NOTES.md
           prerelease: ${{ contains(env.TAG, 'rc') }}
           files: |
             dist/*
