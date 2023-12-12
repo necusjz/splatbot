@@ -1,5 +1,5 @@
-# splatbot
-Automate plotting detailed posts in [Splatoon](https://en.wikipedia.org/wiki/Splatoon) wirelessly based on BlueZ, and optimize its efficiency by treating the process as a variant of Traveling Salesman Problem (TSP).
+# Splatoon Bot
+Automate plotting posts in [Splatoon](https://en.wikipedia.org/wiki/Splatoon) based on BlueZ, and optimize its efficiency via Traveling Salesman Problem (TSP).
 
 ## Installation
 [BlueZ](http://www.bluez.org/) is a Bluetooth protocol stack included with the official Linux kernel distributions. If you have a Linux machine with a Bluetooth connection, then things become easier:
@@ -26,7 +26,7 @@ Generate the macro represents the actual plotting process:
  $ splatbot macro -i <image>
  ```
 
-Start plotting the post on switch console or another window:
+Wirelessly plotting the post on switch console or another window:
  ```bash
  $ splatbot start -i <macro> [--dry-run]
  ```

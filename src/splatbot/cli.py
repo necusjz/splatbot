@@ -5,7 +5,7 @@ from .macro import generate_macro
 from .start import start_plotting
 
 
-@click.group(help="Automate plotting detailed posts in Splatoon wirelessly.")
+@click.group(help="Automate plotting posts in Splatoon based on BlueZ.")
 def main():
     pass
 
@@ -19,7 +19,7 @@ def macro(input):
     generate_macro(input)
 
 
-@main.command(help="Start plotting the post on switch console or another window.")
+@main.command(help="Wirelessly plotting the post on switch console or another window.")
 @click.option(
     "--input", "-i", required=True, metavar="PATH",
     help="Path to the macro stands for the button sequence."
