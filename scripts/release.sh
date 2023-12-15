@@ -16,3 +16,5 @@ else
     echo "Cancelled."
     exit 1
 fi
+
+# git tag -l | xargs git tag -d && git fetch -t

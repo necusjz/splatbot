@@ -5,7 +5,7 @@ from tqdm import tqdm
 
 
 def dry_run(commands):
-    def update(*args):
+    def update(_):
         progress_bar.update(1)
 
         try:
