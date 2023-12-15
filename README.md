@@ -1,5 +1,9 @@
 # Splatoon Bot
-Automate plotting posts in [Splatoon](https://en.wikipedia.org/wiki/Splatoon) based on BlueZ, and optimize its efficiency via Traveling Salesman Problem (TSP).
+Automate plotting posts in [Splatoon](https://splatoonwiki.org/wiki/Splatoon) based on BlueZ, and optimize its efficiency via Traveling Salesman Problem (TSP).
+
+The mailbox is a service in the Splatoon hub that allows players to create drawings and share them via social media. The drawings may be viewable by other players and may be displayed as signs or graffiti in the hub and in various stages in multiplayer matches.
+
+[](https://raw.githubusercontent.com/necusjz/p/master/splatbot/mailbox.png)
 
 ## Installation
 [BlueZ](http://www.bluez.org/) is a Bluetooth protocol stack included with the official Linux kernel distributions. If you have a Linux machine with a Bluetooth connection, then things become easier:
@@ -31,25 +35,46 @@ Wirelessly plotting the post on switch console or another window:
  $ splatbot start -i <macro> [--dry-run]
  ```
 
-### Vagrant commands
+Some Vagrant commands that might be useful:
+```text
 Create and configure guest machines according to your Vagrantfile:
-```bash
 $ vagrant up
-```
 
 SSH into a running Vagrant machine and give you access to a shell:
-```bash
 $ vagrant ssh
-```
 
 Shut down the running machine Vagrant is managing:
-```bash
 $ vagrant halt
-```
 
 Stop the running machine Vagrant is managing and destroy all resources that were created during the machine creation process:
-```bash
 $ vagrant destroy
+```
+
+## Benchmark
+We provide a dataset collected from [ikasumi.art](https://ikasumi.art/) to easier achieve performance test on your pathing algorithm:
+[](https://raw.githubusercontent.com/necusjz/p/master/splatbot/dataset.png)
+
+The results will be shown in the pipeline:
+```text
++------------------+-----------+------------+--------------+
+| Benchmark        | Current   | Previous   | Result       |
++==================+===========+============+==============+
+| jellyfish.png    | 108606    | 44514      | 2.44x slower |
++------------------+-----------+------------+--------------+
+| judd.png         | 100660    | 52616      | 1.91x slower |
++------------------+-----------+------------+--------------+
+| kanji.png        | 97159     | 55961      | 1.74x slower |
++------------------+-----------+------------+--------------+
+| marie.png        | 100218    | 53238      | 1.88x slower |
++------------------+-----------+------------+--------------+
+| octoling.png     | 98888     | 54232      | 1.82x slower |
++------------------+-----------+------------+--------------+
+| sakura.png       | 87194     | 66214      | 1.32x slower |
++------------------+-----------+------------+--------------+
+| skyline.png      | 89671     | 63751      | 1.41x slower |
++------------------+-----------+------------+--------------+
+| splattershot.png | 100344    | 52910      | 1.90x slower |
++------------------+-----------+------------+--------------+
 ```
 
 ## Contributing
