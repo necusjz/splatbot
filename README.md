@@ -3,7 +3,7 @@ Automate plotting posts in [Splatoon](https://splatoonwiki.org/wiki/Splatoon) ba
 
 The mailbox is a service in the Splatoon hub that allows players to create drawings and share them via social media. The drawings may be viewable by other players and may be displayed as signs or graffiti in the hub and in various stages in multiplayer matches.
 
-[](https://raw.githubusercontent.com/necusjz/p/master/splatbot/mailbox.png)
+![](https://raw.githubusercontent.com/necusjz/p/master/splatbot/mailbox.png)
 
 ## Installation
 [BlueZ](http://www.bluez.org/) is a Bluetooth protocol stack included with the official Linux kernel distributions. If you have a Linux machine with a Bluetooth connection, then things become easier:
@@ -52,9 +52,10 @@ $ vagrant destroy
 
 ## Benchmark
 We provide a dataset collected from [ikasumi.art](https://ikasumi.art/) to easier achieve performance test on your pathing algorithm:
-[](https://raw.githubusercontent.com/necusjz/p/master/splatbot/dataset.png)
 
-The results will be shown in the pipeline:
+![](https://raw.githubusercontent.com/necusjz/p/master/splatbot/dataset.png)
+
+The results will be shown in the pipeline (via _pytest -s -v --color=yes tests/_):
 ```text
 +------------------+-----------+------------+--------------+
 | Benchmark        | Current   | Previous   | Result       |

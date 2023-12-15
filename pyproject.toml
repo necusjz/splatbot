@@ -26,10 +26,6 @@ dependencies = [
     "tqdm>=4.64.0",
 ]
 
-[project.urls]
-changelog = "https://github.com/necusjz/splatbot/blob/main/CHANGELOG.md"
-repository = "https://github.com/necusjz/splatbot"
-
 [project.optional-dependencies]
 dev = [
     "build>=1.0.3",
@@ -40,7 +36,11 @@ dev = [
 ]
 
 [project.scripts]
-splatbot = "splatbot.cli:main"
+splatbot = "src.splatbot.cli:main"
+
+[project.urls]
+Changelog = "https://github.com/necusjz/splatbot/blob/main/CHANGELOG.md"
+Repository = "https://github.com/necusjz/splatbot"
 
 [tool.setuptools.packages.find]
 exclude = [

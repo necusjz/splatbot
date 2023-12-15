@@ -2,7 +2,7 @@
 from datetime import datetime
 from pathlib import Path
 
-from splatbot.version import VERSION
+from src.splatbot.version import VERSION
 
 
 def main():

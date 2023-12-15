@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 from tabulate import tabulate
 
-from splatbot.macro import pathing
+from src.splatbot.macro import pathing
 
 
 def test_pathing():
@@ -26,5 +26,5 @@ def test_pathing():
 
     headers = ["Benchmark", "Current", "Previous", "Result"]
 
-    print("\n")
+    print("")
     print(tabulate(data, headers=headers, tablefmt="grid", numalign="left"))
