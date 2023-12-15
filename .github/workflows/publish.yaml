@@ -28,6 +28,10 @@ jobs:
       fail-fast: false
       matrix:
         python: ["3.8", "3.10"]
+        task:
+          - name: Test
+            run: |
+              pytest -s -v --color=yes tests/
 
         include:
           - python: "3.10"
