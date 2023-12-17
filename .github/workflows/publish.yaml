@@ -36,6 +36,11 @@ jobs:
         include:
           - python: "3.10"
             task:
+              name: Lint
+              run: ruff check .
+
+          - python: "3.10"
+            task:
               name: Build
               run: |
                 python -m build
