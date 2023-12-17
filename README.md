@@ -35,7 +35,7 @@ Wirelessly plotting the post on switch console or another window:
  $ splatbot start -i <macro> [--dry-run]
  ```
 
-Some Vagrant commands that might be useful:
+Several Vagrant commands that might be useful:
 ```text
 Create and configure guest machines according to your Vagrantfile:
 $ vagrant up
@@ -50,6 +50,11 @@ Stop the running machine Vagrant is managing and destroy all resources that were
 $ vagrant destroy
 ```
 
+## Pathing
+We optimize the pathing efficiency by treating the process as a variant of [Traveling Salesman Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem) (TSP). It's a classic optimization problem where the goal is to find the shortest possible route that visits a given set of cities and returns to the original city.
+
+If you want to solve it without returning to the start, it essentially becomes the problem of finding a [Hamiltonian Path](https://en.wikipedia.org/wiki/Hamiltonian_path), which visits each city exactly once. To further scale down, we divide the image into 8x3 parts (patch size = 40) and label contiguous region as a city.
+
 ## Benchmark
 We provide a dataset collected from [ikasumi.art](https://ikasumi.art/) to easier achieve performance test on your pathing algorithm:
 
@@ -60,21 +65,23 @@ The results will be shown in the pipeline (via _pytest -s -v --color=yes tests/_
 +------------------+-----------+------------+--------------+
 | Benchmark        | Current   | Previous   | Result       |
 +==================+===========+============+==============+
-| jellyfish.png    | 108606    | 44514      | 2.44x slower |
+| jellyfish.png    | 17078     | 44514      | 2.61x faster |
 +------------------+-----------+------------+--------------+
-| judd.png         | 100660    | 52616      | 1.91x slower |
+| judd.png         | 32728     | 52616      | 1.61x faster |
 +------------------+-----------+------------+--------------+
-| kanji.png        | 97159     | 55961      | 1.74x slower |
+| kanji.png        | 41557     | 55961      | 1.35x faster |
 +------------------+-----------+------------+--------------+
-| marie.png        | 100218    | 53238      | 1.88x slower |
+| marie.png        | 43280     | 53238      | 1.23x faster |
 +------------------+-----------+------------+--------------+
-| octoling.png     | 98888     | 54232      | 1.82x slower |
+| octoling.png     | 38008     | 54232      | 1.43x faster |
 +------------------+-----------+------------+--------------+
-| sakura.png       | 87194     | 66214      | 1.32x slower |
+| sakura.png       | 63809     | 66214      | 1.04x faster |
 +------------------+-----------+------------+--------------+
-| skyline.png      | 89671     | 63751      | 1.41x slower |
+| skyline.png      | 61949     | 63751      | 1.03x faster |
 +------------------+-----------+------------+--------------+
-| splattershot.png | 100344    | 52910      | 1.90x slower |
+| splattershot.png | 34804     | 52910      | 1.52x faster |
++------------------+-----------+------------+--------------+
+| Geometric Mean   | N/A       | N/A        | 1.33x faster |
 +------------------+-----------+------------+--------------+
 ```
 
