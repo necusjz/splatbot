@@ -7,9 +7,15 @@ from tabulate import tabulate
 from src.splatbot.macro import pathing
 
 
+def cal_result(curr, prev):
+    return f"{prev / curr:.2f}x faster" if curr < prev else f"{curr / prev:.2f}x slower"
+
+
 def test_pathing():
     dataset = Path("tests/dataset")
+
     data = []
+    curr_sum = prev_sum = 0
 
     for image in sorted(dataset.iterdir()):
         image_path = dataset / image.name
@@ -20,9 +26,14 @@ def test_pathing():
 
         curr = len(pathing(matrix))
         prev = 120 * 320 + np.count_nonzero(matrix)
-        result = f"{prev / curr:.2f}x faster" if curr <= prev else f"{curr / prev:.2f}x slower"
+        result = cal_result(curr, prev)
 
         data.append((image.name, curr, prev, result))
+
+        curr_sum += curr
+        prev_sum += prev
+
+    data.append(("Geometric Mean", "N/A", "N/A", cal_result(curr_sum, prev_sum)))
 
     headers = ["Benchmark", "Current", "Previous", "Result"]
 
