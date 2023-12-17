@@ -23,7 +23,9 @@ dependencies = [
     "matplotlib>=3.6.3",
     "numpy>=1.23.2",
     "nxbt>=0.1.4",
+    "scikit-image>=0.19.3",
     "tqdm>=4.64.0",
+    "tsp-solver2>=0.4.1",
 ]
 
 [project.optional-dependencies]
