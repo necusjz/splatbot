@@ -1,5 +1,4 @@
-from nxbt import Nxbt
-from nxbt import PRO_CONTROLLER
+from nxbt import PRO_CONTROLLER, Nxbt
 
 
 class Button:

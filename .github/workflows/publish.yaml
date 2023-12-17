@@ -41,6 +41,12 @@ jobs:
 
           - python: "3.10"
             task:
+              name: Style
+              run: |
+                isort --check .
+
+          - python: "3.10"
+            task:
               name: Build
               run: |
                 python -m build

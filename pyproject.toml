@@ -12,7 +12,7 @@ requires-python = ">=3.8"
 readme = "README.md"
 classifiers = [
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python",
     "Intended Audience :: Science/Research",
@@ -31,6 +31,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "build>=1.0.3",
+    "isort>=5.6.4",
     "packaging>=23.1",
     "pytest>=7.2.1",
     "ruff>=0.1.2",
@@ -54,10 +55,3 @@ exclude = [
 
 [tool.setuptools.dynamic]
 version = {attr = "src.splatbot.version.VERSION"}
-
-[tool.ruff]
-line-length = 120
-target-version = "py310"
-
-[tool.ruff.per-file-ignores]
-"__init__.py" = ["F401"]

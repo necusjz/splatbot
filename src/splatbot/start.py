@@ -1,9 +1,7 @@
 import time
 
-from .controller import Button
-from .controller import Controller
+from .controller import Button, Controller
 from .simulation import dry_run
-
 
 command_map = {
     "a": Button.A,
