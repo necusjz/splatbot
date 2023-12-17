@@ -4,14 +4,55 @@ from skimage.measure import label
 from tsp_solver.greedy_numpy import solve_tsp
 
 
+def label_routes(matrix):
+    matrix, count = label(matrix, return_num=True)
+
+    routes = []
+    for num in range(1, count + 1):
+        condition = matrix == num
+
+        curr_row = np.argwhere(condition)[0][0]
+        is_right = True
+        points = []
+
+        route = []
+        for point in np.argwhere(condition):
+            if point[0] == curr_row:
+                points.append(point)
+            else:
+                route += points if is_right else points[::-1]
+
+                curr_row = point[0]
+                is_right = not is_right
+                points = [point]
+
+        route += points if is_right else points[::-1]
+
+        routes.append(route)
+
+    return routes
+
+
 def get_delta(p1, p2):
     return map(lambda x, y: x - y, p2, p1)
 
 
 def manh(p1, p2):
-    delta_x, delta_y = get_delta(p1, p2)
+    return sum(map(abs, get_delta(p1, p2)))
 
-    return abs(delta_x) + abs(delta_y)
+
+def cal_distance_matrix(endpoints):
+    n = len(endpoints)
+    distance_matrix = np.zeros((n, n))
+
+    for i in range(n):
+        for j in range(1, n):
+            if i == j:
+                continue
+
+            distance_matrix[i][j] = manh(endpoints[i][1], endpoints[j][0])
+
+    return distance_matrix
 
 
 def goto_next(p1, p2):
@@ -25,51 +66,16 @@ def goto_next(p1, p2):
 
 
 def pathing(matrix):
-    matrix, count = label(matrix, return_num=True)
+    routes = label_routes(matrix)
+    endpoints = [(route[0], route[-1]) for route in routes]
 
-    routes = []
-    for num in range(1, count + 1):
-        condition = matrix == num
+    distances = cal_distance_matrix(endpoints)
 
-        curr_row = np.argwhere(condition)[0][0]
-        is_right = True
-        curr = []
-
-        route = []
-        for point in np.argwhere(condition):
-            if point[0] == curr_row:
-                curr.append(point)
-            else:
-                route += curr if is_right else curr[::-1]
-
-                curr_row = point[0]
-                is_right = not is_right
-                curr = [point]
-
-        route += curr if is_right else curr[::-1]
-
-        routes.append(route)
-
-    entry_exit_points = [(route[0], route[-1]) for route in routes]
-
-    n = len(entry_exit_points)
-    distance = np.zeros((n, n))
-    for i in range(n):
-        for j in range(1, n):
-            if i == j:
-                continue
-
-            distance[i][j] = manh(entry_exit_points[i][1], entry_exit_points[j][0])
-
-    points = []
-    for i in solve_tsp(distance, optim_steps=16, endpoints=(0, None)):
-        points += routes[i]
-
-    commands = []
-    current = (0, 0)
-    for point in points:
-        commands += goto_next(current, point)
-        current = point
+    commands, current = [], (0, 0)
+    for i in solve_tsp(distances, optim_steps=16, endpoints=(0, None)):
+        for point in routes[i]:
+            commands += goto_next(current, point)
+            current = point
 
     return commands + ["b"]  # save and quit
 
