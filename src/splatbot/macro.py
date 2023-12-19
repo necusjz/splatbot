@@ -1,6 +1,6 @@
 import numpy as np
 from PIL import Image
-from skimage.measure import label
+from scipy.ndimage import generate_binary_structure, label
 from tsp_solver.greedy_numpy import solve_tsp
 
 
@@ -32,7 +32,7 @@ def goto_next(p1, p2, plot=True):
 
 
 def label_routes(matrix, offset):
-    matrix, count = label(matrix, return_num=True)
+    matrix, count = label(matrix, structure=generate_binary_structure(2, 2))
 
     routes = []
     for num in range(1, count + 1):
