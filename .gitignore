@@ -160,5 +160,6 @@ cython_debug/
 .idea/
 
 # General
-.vagrant/
+.pdm-build/
 .ruff_cache/
+.vagrant/

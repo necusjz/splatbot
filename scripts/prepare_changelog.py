@@ -2,7 +2,7 @@
 from datetime import datetime
 from pathlib import Path
 
-from src.splatbot.version import VERSION
+from src.splatbot import __version__
 
 
 def main():
@@ -16,7 +16,7 @@ def main():
         line = lines[i]
         if line.startswith("## [Unreleased]"):
             insert_idx = i + 1
-        elif line.startswith(f"## [{VERSION}]"):
+        elif line.startswith(f"## [{__version__}]"):
             print("CHANGELOG.md already up-to-date.")
             return
 
@@ -27,7 +27,7 @@ def main():
         raise RuntimeError("Couldn't find [Unreleased] section.")
 
     lines.insert(insert_idx, "\n")
-    lines.insert(insert_idx + 1, f"## [{VERSION}] - {datetime.now().strftime('%Y-%m-%d')}\n")
+    lines.insert(insert_idx + 1, f"## [{__version__}] - {datetime.now().strftime('%Y-%m-%d')}\n")
 
     with changelog.open("w") as fp:
         fp.writelines(lines)

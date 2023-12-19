@@ -1,7 +1,7 @@
-# https://setuptools.pypa.io/en/latest/userguide/quickstart.html
+# https://backend.pdm-project.org/#quick-start
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
 
 [project]
 name = "splatbot"
@@ -30,9 +30,9 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "build>=1.0.3",
     "isort>=5.6.4",
     "packaging>=23.1",
+    "pdm>=2.7.0",
     "pytest>=7.2.1",
     "ruff>=0.1.2",
     "tabulate>=0.9.0",
@@ -40,18 +40,17 @@ dev = [
 ]
 
 [project.scripts]
-splatbot = "src.splatbot.cli:main"
+splatbot = "splatbot.cli:main"
 
 [project.urls]
 Changelog = "https://github.com/necusjz/splatbot/blob/main/CHANGELOG.md"
 Repository = "https://github.com/necusjz/splatbot"
 
-[tool.setuptools.packages.find]
-exclude = [
-    "scripts*",
-    "tests*",
-    "vagrant*",
-]
+[tool.pdm.build]
+package-dir = "src"
+includes = ["src/splatbot"]
+source-includes = ["scripts", "tests", "vagrant"]
 
-[tool.setuptools.dynamic]
-version = {attr = "src.splatbot.version.VERSION"}
+[tool.pdm.version]
+source = "file"
+path = "src/splatbot/__init__.py"

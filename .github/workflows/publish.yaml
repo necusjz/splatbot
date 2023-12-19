@@ -49,7 +49,7 @@ jobs:
             task:
               name: Build
               run: |
-                python -m build
+                pdm build
 
     steps:
       - uses: actions/checkout@v3
