@@ -51,9 +51,9 @@ $ vagrant destroy
 ```
 
 ## Pathing
-We optimize the pathing efficiency by treating the process as a variant of [Traveling Salesman Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem) (TSP). It's a classic optimization problem where the goal is to find the shortest possible route that visits a given set of cities and returns to the original city.
+We optimize pathing efficiency by treating the plotting process as a variant of [Traveling Salesman Problem](https://en.wikipedia.org/wiki/Travelling_salesman_problem) (TSP). It's a classic optimization problem where the goal is to find the shortest possible route that visits a given set of cities and returns to the original city.
 
-If you want to solve it without returning to the start, it essentially becomes the problem of finding a [Hamiltonian Path](https://en.wikipedia.org/wiki/Hamiltonian_path), which visits each city exactly once. To further scale down, we divide the image into 8x3 parts (patch size = 40) and label contiguous region as a city.
+If you want to solve it without returning to the start, it essentially becomes the problem of finding a [Hamiltonian Path](https://en.wikipedia.org/wiki/Hamiltonian_path), which visits each city exactly once. To further scale down, we divide the image into 8x3 parts (with _patch size of 40_) and label the contiguous region as a city.
 
 ## Benchmark
 We provide a dataset collected from [ikasumi.art](https://ikasumi.art/) to easier achieve performance test on your pathing algorithm:
