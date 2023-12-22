@@ -17,20 +17,6 @@ def divide_image(matrix):
     return submatrices
 
 
-def get_delta(p1, p2):
-    return map(lambda x, y: x - y, p2, p1)
-
-
-def goto_next(p1, p2, plot=True):
-    commands = []
-    delta_x, delta_y = get_delta(p1, p2)
-
-    commands += ["u", "d"][int(delta_x > 0)] * abs(delta_x)
-    commands += ["l", "r"][int(delta_y > 0)] * abs(delta_y)
-
-    return commands + ["a"] if plot else commands
-
-
 def label_routes(matrix, offset):
     matrix, count = label(matrix, structure=generate_binary_structure(2, 2))
 
@@ -60,8 +46,22 @@ def label_routes(matrix, offset):
     return routes
 
 
+def get_delta(p1, p2):
+    return map(lambda x, y: x - y, p2, p1)
+
+
 def manh(p1, p2):
     return sum(map(abs, get_delta(p1, p2)))
+
+
+def goto_next(p1, p2, plot=True):
+    commands = []
+    delta_x, delta_y = get_delta(p1, p2)
+
+    commands += ["u", "d"][int(delta_x > 0)] * abs(delta_x)
+    commands += ["l", "r"][int(delta_y > 0)] * abs(delta_y)
+
+    return commands + ["a"] if plot else commands
 
 
 def calculate_distance_matrix(endpoints):
@@ -92,7 +92,7 @@ def pathing(matrix):
 
         distances = calculate_distance_matrix(endpoints)
 
-        for i in solve_tsp(distances, optim_steps=16, endpoints=(0, None)):  # do not specify exit
+        for i in solve_tsp(distances, optim_steps=16, endpoints=(0, None)):  # exit unspecified
             for point in routes[i]:
                 commands += goto_next(current, point)
                 current = point

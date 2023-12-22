@@ -3,6 +3,18 @@ import numpy as np
 from matplotlib.animation import FuncAnimation
 from tqdm import tqdm
 
+offset_map = {
+    "b": (0, 0),  # do nothing
+    "u": (-1, 0), "d": (1, 0), "l": (0, -1), "r": (0, 1)
+}
+
+
+def apply_offset(location, offset):
+    i, j = location
+    x, y = offset
+
+    return i + x, j + y
+
 
 def dry_run(commands):
     def update(_):
@@ -21,15 +33,7 @@ def dry_run(commands):
         if cmd == "a":
             data[loc] = 1
         else:
-            x, y = loc
-            if cmd == "u":
-                loc = (x - 1, y)
-            if cmd == "d":
-                loc = (x + 1, y)
-            if cmd == "l":
-                loc = (x, y - 1)
-            if cmd == "r":
-                loc = (x, y + 1)
+            loc = apply_offset(loc, offset_map[cmd])
 
         data[loc] = 0.51 if data[loc] == 1 else 0.49
 
