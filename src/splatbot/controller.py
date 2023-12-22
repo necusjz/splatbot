@@ -45,10 +45,10 @@ class Controller:
         self.nx.wait_for_connection(self.index)
 
     def macro(self, buttons):
-        macro = [f"{button} {self.press_ms/10000}s\n {self.delay_ms/10000}" for button in buttons]
+        macros = [f"{button} {self.press_ms/1000}s\n {self.delay_ms/1000}" for button in buttons]
         self.nx.macro(
             controller_index=self.index,
-            macro="\n".join(macro)
+            macro="\n".join(macros)
         )
 
     def disconnect(self):
