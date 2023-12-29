@@ -1,4 +1,4 @@
-name: Publish
+name: Main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
