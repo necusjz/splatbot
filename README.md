@@ -1,4 +1,6 @@
 # Splatoon Bot
+[![Build Status](https://github.com/necusjz/splatbot/actions/workflows/main.yaml/badge.svg)](https://github.com/necusjz/splatbot/actions/workflows/main.yaml)
+
 Automate plotting posts in [Splatoon](https://splatoonwiki.org/wiki/Splatoon) based on BlueZ, and optimize its efficiency via Traveling Salesman Problem (TSP).
 
 The mailbox is a service in the Splatoon hub that allows players to create drawings and share them via social media. The drawings may be viewable by other players and may be displayed as signs or graffiti in the hub and in various stages in multiplayer matches.
