@@ -34,9 +34,9 @@ def start_plotting(macro_path, is_dry_run):
 
         buttons = [command_map[cmd.strip()] for cmd in commands]
 
-        beg = time.time()
+        beg = time.perf_counter()
         ctl.macro(buttons)
-        end = time.time()
+        end = time.perf_counter()
         elapsed = time.strftime("%H:%M:%S", time.gmtime(end - beg))
 
         print("")
