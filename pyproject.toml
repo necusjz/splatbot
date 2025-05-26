@@ -1,11 +1,10 @@
-# https://backend.pdm-project.org/#quick-start
 [build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "splatbot"
-dynamic = ["version"]
+# version is defined dynamically below
 description = "Automate plotting posts in Splatoon based on BlueZ, and optimize its efficiency via Traveling Salesman Problem (TSP)."
 authors = [{name = "necusjz", email = "necusjz@gmail.com"}]
 requires-python = ">=3.9,<3.12"
@@ -15,7 +14,7 @@ classifiers = [
     "Development Status :: 5 - Production/Stable",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python",
-    "Intended Audience :: Science/Research",
+    "Intended Audience :: Science/Research"
 ]
 dependencies = [
     "Pillow>=9.2.0",
@@ -25,18 +24,17 @@ dependencies = [
     "nxbt>=0.1.4",
     "scipy>=1.9.1",
     "tqdm>=4.64.0",
-    "tsp-solver2>=0.4.1",
+    "tsp-solver2>=0.4.1"
 ]
 
 [project.optional-dependencies]
 dev = [
     "isort>=5.6.4",
     "packaging>=23.1",
-    "pdm>=2.7.0",
     "pytest>=7.2.1",
     "ruff>=0.1.2",
     "tabulate>=0.9.0",
-    "twine>=1.11.0",
+    "twine>=1.11.0"
 ]
 
 [project.scripts]
@@ -46,11 +44,9 @@ splatbot = "splatbot.cli:main"
 Changelog = "https://github.com/necusjz/splatbot/blob/main/CHANGELOG.md"
 Repository = "https://github.com/necusjz/splatbot"
 
-[tool.pdm.build]
-package-dir = "src"
-includes = ["src/splatbot"]
-source-includes = ["scripts", "tests", "vagrant"]
+[tool.hatch.build]
+packages = ["src/splatbot"]
+include = ["scripts", "tests", "vagrant"]
 
-[tool.pdm.version]
-source = "file"
+[tool.hatch.version]
 path = "src/splatbot/__init__.py"

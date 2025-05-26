@@ -1,5 +1,6 @@
 name: Python virtualenv
 description: Set up a Python virtual environment with caching
+
 inputs:
   python-version:
     description: The Python version to use
@@ -8,6 +9,7 @@ inputs:
     description: Update this to invalidate the cache
     required: true
     default: v0
+
 runs:
   using: composite
   steps:
@@ -18,12 +20,13 @@ runs:
 
     - shell: bash
       run: |
-        # Install prerequisites.
-        pip install --upgrade pip wheel virtualenv
+        pip install --upgrade pipx
+        pipx ensurepath
+        pipx install uv
 
     - shell: bash
       run: |
-        # Get the exact Python version to use in the cache key.
+        # Get exact Python version for cache key
         echo "PYTHON_VERSION=$(python --version)" >> $GITHUB_ENV
 
     - uses: actions/cache@v3
@@ -32,25 +35,16 @@ runs:
         path: .venv
         key: ${{ inputs.cache-prefix }}-${{ runner.os }}-${{ env.PYTHON_VERSION }}-${{ hashFiles('pyproject.toml') }}
 
-    - if: steps.virtualenv-cache.outputs.cache-hit != 'true'
-      shell: bash
+    - shell: bash
       run: |
-        # Set up virtual environment without cache hit.
-        test -d .venv || virtualenv -p $(which python) --copies --reset-app-data .venv
-        . .venv/bin/activate
-        pip install -e .[dev]
-
-    - if: steps.virtualenv-cache.outputs.cache-hit == 'true'
-      shell: bash
-      run: |
-        # Set up virtual environment from cache hit.
-        . .venv/bin/activate
-        pip install --no-deps -e .[dev]
+        uv venv .venv
+        source .venv/bin/activate
+        uv pip compile --extra dev
+        uv pip sync
 
     - shell: bash
       run: |
-        # Show environment info.
-        . .venv/bin/activate
+        source .venv/bin/activate
         echo "Successfully installed $(python --version) virtual environment to $(which python)"
         echo "Packages:"
-        pip freeze
+        uv pip freeze

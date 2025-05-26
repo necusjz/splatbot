@@ -15,7 +15,6 @@ on:
       - "v*.*.*"
 
 env:
-  # Change this to invalidate existing cache.
   CACHE_PREFIX: v0
   PYTHONPATH: ./
 
@@ -30,9 +29,7 @@ jobs:
         python: ["3.9", "3.11"]
         task:
           - name: Test
-            run: |
-              pytest -s -v --color=yes tests/
-
+            run: pytest -s -v --color=yes tests/
         include:
           - python: "3.11"
             task:
@@ -42,32 +39,57 @@ jobs:
           - python: "3.11"
             task:
               name: Style
-              run: |
-                isort --check .
+              run: isort --check .
 
           - python: "3.11"
             task:
               name: Build
-              run: |
-                pdm build
+              run: pdm build
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install prerequisites
+      - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y python3-pip bluez bluetooth pkg-config build-essential libdbus-glib-1-dev libgirepository1.0-dev
 
-      - name: Setup Python environment
-        uses: ./.github/actions/setup-venv
+      - name: Setup Python
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
-          cache-prefix: ${{ env.CACHE_PREFIX }}
+
+      - name: Install uv
+        run: |
+          pip install --upgrade pipx
+          pipx ensurepath
+          pipx install uv
+
+      - name: Setup environment
+        run: |
+          echo "PYTHON_VERSION=$(python --version)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v3
+        id: uv-cache
+        with:
+          path: .venv
+          key: ${{ env.CACHE_PREFIX }}-${{ runner.os }}-${{ env.PYTHON_VERSION }}-${{ hashFiles('pyproject.toml') }}
+
+      - name: Install dependencies
+        run: |
+          uv venv .venv
+          source .venv/bin/activate
+          if [[ "${{ steps.uv-cache.outputs.cache-hit }}" == "true" ]]; then
+            echo "Using cached virtualenv"
+          else
+            echo "Fresh environment setup"
+          fi
+          uv pip compile --extra dev
+          uv pip sync
 
       - name: ${{ matrix.task.name }}
         run: |
-          . .venv/bin/activate
+          source .venv/bin/activate
           ${{ matrix.task.run }}
 
       - name: Upload package distribution files
@@ -80,8 +102,8 @@ jobs:
       - name: Clean up
         if: always()
         run: |
-          . .venv/bin/activate
-          pip uninstall -y splatbot
+          source .venv/bin/activate
+          uv pip uninstall -y splatbot
 
   release:
     name: Release
@@ -93,7 +115,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install prerequisites
+      - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y python3-pip bluez bluetooth pkg-config build-essential libdbus-glib-1-dev libgirepository1.0-dev
@@ -103,10 +125,16 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install requirements
+      - name: Install uv and sync environment
         run: |
-          pip install --upgrade pip wheel build
-          pip install -e .[dev]
+          pip install --upgrade pipx
+          pipx ensurepath
+          pipx install uv
+          uv venv .venv
+          source .venv/bin/activate
+          uv pip compile --extra dev
+          uv pip sync
+          uv pip install build twine
 
       - name: Prepare environment
         run: |
@@ -125,6 +153,7 @@ jobs:
 
       - name: Publish package to PyPI
         run: |
+          source .venv/bin/activate
           twine upload -u '${{ secrets.PYPI_USERNAME }}' -p '${{ secrets.PYPI_PASSWORD }}' dist/*
 
       - name: Publish GitHub release
