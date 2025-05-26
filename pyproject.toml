@@ -8,7 +8,7 @@ name = "splatbot"
 dynamic = ["version"]
 description = "Automate plotting posts in Splatoon based on BlueZ, and optimize its efficiency via Traveling Salesman Problem (TSP)."
 authors = [{name = "necusjz", email = "necusjz@gmail.com"}]
-requires-python = ">=3.8"
+requires-python = ">=3.9,<3.12"
 readme = "README.md"
 classifiers = [
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
