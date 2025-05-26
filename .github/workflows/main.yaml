@@ -81,8 +81,8 @@ jobs:
           else
             echo "Fresh environment setup"
           fi
-          uv pip compile --extra dev pyproject.toml
-          uv pip sync pyproject.toml
+          uv pip compile --extra dev pyproject.toml -o requirements.txt
+          uv pip sync requirements.txt
 
       - name: Run task ${{ matrix.task.name }}
         run: |
@@ -129,8 +129,8 @@ jobs:
           pipx install uv
           uv venv .venv
           . .venv/bin/activate
-          uv pip compile --extra dev pyproject.toml
-          uv pip sync pyproject.toml
+          uv pip compile --extra dev pyproject.toml -o requirements.txt
+          uv pip sync requirements.txt
           uv pip install build twine
 
       - name: Prepare environment
