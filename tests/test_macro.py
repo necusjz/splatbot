@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 from tabulate import tabulate
 
-from src.splatbrush.macro import pathing
+from src.splatbot.macro import pathing
 
 
 def calculate_result(curr, prev):

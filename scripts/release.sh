@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 export PYTHONPATH="$PROJECT_ROOT"
 
-TAG=$(python -c 'from src.splatbrush import __version__; print("v" + __version__)')
+TAG=$(python -c 'from src.splatbot import __version__; print("v" + __version__)')
 
 read -p "Creating new release for $TAG. Do you want to continue? [Y/n] " prompt
 

@@ -102,7 +102,7 @@ jobs:
         if: always()
         run: |
           . .venv/bin/activate
-          uv pip uninstall -y splatbrush || true
+          uv pip uninstall -y splatbot || true
 
   release:
     name: Release

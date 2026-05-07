@@ -59,7 +59,7 @@ if __name__ == "__main__":
     print("")
 
     print("---")
-    print("Welcome to `splatbrush` setup wizard.")
+    print("Welcome to `splatbot` setup wizard.")
     print("As part of the first step in this process, you will select the USB Bluetooth adapter that will be used.")
     print("Please ensure that your adapter is plugged into this computer.")
     print("")
@@ -86,7 +86,7 @@ if __name__ == "__main__":
 
     is_valid = False
     while not is_valid:
-        choice = input("Would you like to install `splatbrush` from <0> PyPI or <1> local project? [0-1] ")
+        choice = input("Would you like to install `splatbot` from <0> PyPI or <1> local project? [0-1] ")
         if choice in {"0", "1"}:
             is_valid = True
         else:
@@ -106,13 +106,13 @@ if __name__ == "__main__":
     ]"""
     vagrantfile = vagrantfile.replace("{{USB_FILTER}}", usb_filter)
     if choice == "0":
-        vagrantfile = vagrantfile.replace("{{SHELL_CONFIG}}", "pip install splatbrush")
+        vagrantfile = vagrantfile.replace("{{SHELL_CONFIG}}", "pip install splatbot")
     else:
-        vagrantfile = vagrantfile.replace("{{SHELL_CONFIG}}", "cd /splatbrush && pip install -e .")
+        vagrantfile = vagrantfile.replace("{{SHELL_CONFIG}}", "cd /splatbot && pip install -e .")
     with open("Vagrantfile", "w", encoding="utf-8") as fp:
         fp.write(vagrantfile)
     print("Done!")
     print("")
 
-    print("You can now create `splatbrush` guest machine with `vagrant up`.")
+    print("You can now create `splatbot` guest machine with `vagrant up`.")
     print("After booting up, the Vagrant machine can be access with `vagrant ssh`.")

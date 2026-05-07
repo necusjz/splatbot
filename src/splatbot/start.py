@@ -40,4 +40,4 @@ def start_painting(macro_path, is_dry_run):
         elapsed = time.strftime("%H:%M:%S", time.gmtime(end - beg))
 
         print("")
-        print(f"`splatbrush` took {elapsed} to complete your artwork!")
+        print(f"`splatbot` took {elapsed} to complete your artwork!")
