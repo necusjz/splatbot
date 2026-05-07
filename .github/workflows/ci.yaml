@@ -76,13 +76,13 @@ jobs:
 
       - name: Install project dependencies
         run: |
-          uv venv
-          . .venv/bin/activate
           if [ "${{ steps.uv-cache.outputs.cache-hit }}" == "true" ]; then
             echo "Using cached virtual environment."
           else
             echo "Fresh environment setup."
+            uv venv --python ${{ matrix.python }} .venv
           fi
+          . .venv/bin/activate
           uv pip compile --extra dev pyproject.toml -o requirements.txt
           uv pip sync requirements.txt
 
